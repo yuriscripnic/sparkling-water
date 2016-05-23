@@ -30,6 +30,8 @@ class SparklingIDFModel(val sparkModel: IDFModel) extends SparklingModel {
 
     val fileCtx: CodeGeneratorPipeline = new CodeGeneratorPipeline
 
+
+    /**/ sb.p("package ai.h2o;").nl
     /**/ sb.p("import water.*;").nl.nl
     /**/
     /**/ sb.p(s"public class $name {").nl.nl

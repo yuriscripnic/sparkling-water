@@ -38,9 +38,9 @@ public class SparseVector implements Vector {
         this(new DenseVector(v));
     }
 
-    public SparseVector(Map<Integer, Double> mapping) {
-        this._size = mapping.size();
-        this._nnz = this._size;
+    public SparseVector(int size, Map<Integer, Double> mapping) {
+        this._size = size;
+        this._nnz = mapping.size();
 
         List<Map.Entry<Integer, Double>> entryList = new ArrayList<>(mapping.entrySet());
 
@@ -122,7 +122,11 @@ public class SparseVector implements Vector {
 
     @Override
     public double[] raw() {
-        throw new UnsupportedOperationException("Raw access to the data in a sparse vector is not implemented.");
+        double[] result = new double[size()];
+        for (int i = 0; i < _indices.length; i++) {
+            result[_indices[i]] = _values[i];
+        }
+        return result;
     }
 
     @Override

@@ -28,6 +28,7 @@ class SparklingTFModel(val sparkModel: HashingTF,
 
     val fileCtx: CodeGeneratorPipeline = new CodeGeneratorPipeline
 
+    /**/ sb.p("package ai.h2o;").nl
     /**/ sb.p("import java.util.HashMap;").nl
     /**/ sb.p("import java.util.Map;").nl
     /**/ sb.p("import water.*;").nl.nl
@@ -39,7 +40,7 @@ class SparklingTFModel(val sparkModel: HashingTF,
     /*    */ sb.i(2).p("Map<Integer, Double> termFrequencies = new HashMap<>();").nl
     /*    */ sb.i(2).p("for(Object term : document) {").nl
     /*      */ sb.i(3).p("int i = indexOf(term);").nl
-    /*      */ sb.i(3).p("termFrequencies.put(i, termFrequencies.getOrDefault(i, 0.0) + 1.0);").nl
+    /*      */ sb.i(3).p("termFrequencies.put(i, termFrequencies.containsKey(i) ? termFrequencies.get(i) + 1.0 : 1.0);").nl
     /*    */ sb.i(2).p("}").nl
     /*    */ sb.i(2).p("return new SparseVector(termFrequencies);").nl
     /*  */ sb.i(1).p("}").nl.nl
