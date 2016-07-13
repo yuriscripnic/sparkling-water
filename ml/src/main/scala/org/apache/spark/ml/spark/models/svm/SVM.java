@@ -90,12 +90,13 @@ public class SVM extends ModelBuilder<SVMModel, SVMParameters, SVMOutput> {
             }
         }
 
-        if ((null == _parms.train().domains()[_parms.train().find(_parms._response_column)]) &&
-                !(Double.isNaN(_parms._threshold()))) {
+        if (_parms._response_column != null
+            && null == _parms.train().domains()[_parms.train().find(_parms._response_column)]
+            && !(Double.isNaN(_parms._threshold()))) {
             error("_threshold", "Threshold cannot be set for regression SVM.");
-        } else if (
-                (null != _parms.train().domains()[_parms.train().find(_parms._response_column)]) &&
-                        Double.isNaN(_parms._threshold())) {
+        } else if (_parms._response_column != null
+                   && null != _parms.train().domains()[_parms.train().find(_parms._response_column)]
+                   && Double.isNaN(_parms._threshold())) {
             error("_threshold", "Threshold has to be set for binomial SVM.");
         }
     }
@@ -212,7 +213,7 @@ class RowToLabeledPoint implements Function<Row, LabeledPoint> {
         double[] features = new double[nfeatures];
         for (int i = 0; i < nfeatures; i++) {
             // TODO more performant way to handle this??
-            features[i] = Double.parseDouble(row.get(i).toString());
+            features[i] = row.isNullAt(i) ? Double.NaN : Double.parseDouble(row.get(i).toString());
         }
 
         return new LabeledPoint(
