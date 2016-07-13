@@ -21,5 +21,5 @@ banner
 
 (
  cd $TOPDIR
- $SPARK_HOME/bin/spark-submit "$@" $VERBOSE --driver-memory $DRIVER_MEMORY --master $MASTER --conf spark.driver.extraJavaOptions="$EXTRA_DRIVER_PROPS -XX:MaxPermSize=384m" --class "$DRIVER_CLASS" $FAT_JAR_FILE
+ $SPARK_HOME/bin/spark-submit "$@" $VERBOSE --driver-class-path "$TOPDIR/scalastyle.jar" --driver-memory $DRIVER_MEMORY --master $MASTER --conf spark.driver.extraJavaOptions="$EXTRA_DRIVER_PROPS -XX:MaxPermSize=384m" --class "$DRIVER_CLASS" $FAT_JAR_FILE
 )
