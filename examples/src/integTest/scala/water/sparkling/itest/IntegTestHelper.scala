@@ -154,6 +154,7 @@ trait IntegTestStopper {
     } catch {
       case t: Throwable => {
         //logError("Test throws exception!", t)
+        println("!!!! TEST THROWS EXCEPTION !!!!")
         t.printStackTrace()
         water.H2O.exit(-1)
       }
