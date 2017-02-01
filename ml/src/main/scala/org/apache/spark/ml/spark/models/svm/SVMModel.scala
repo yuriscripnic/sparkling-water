@@ -72,12 +72,12 @@ class SVMModel private[svm](val selfKey: Key[SVMModel],
     } else { // Binomial
       val dt = defaultThreshold()
       if(pred > _parms._threshold) {
-        preds(2) = if(pred < dt) dt else pred
-        preds(1) = preds(2) - 1
+        preds(2) = 1
+        preds(1) = 0
         preds(0) = 1
       } else {
-        preds(2) = if(pred >= dt) dt - 1 else pred
-        preds(1) = preds(2) + 1
+        preds(2) = 0
+        preds(1) = 1
         preds(0) = 0
       }
     }
