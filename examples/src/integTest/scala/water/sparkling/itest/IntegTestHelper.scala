@@ -44,6 +44,7 @@ trait IntegTestHelper extends BeforeAndAfterEach with BackendIndependentTestHelp
       Seq("--conf",  "spark.rpc.numRetries=1") ++ // Any RPC failures are suspicious
       Seq("--conf",  "spark.deploy.maxExecutorRetries=1") ++ // Fail directly, do not try to restart executors
       Seq("--conf",  "spark.network.timeout=360s") ++ // Increase network timeout if jenkins machines are busy
+      Seq("--conf",  "spark.worker.timeout=360") ++ // Increase worker timeout if jenkins machines are busy
       // Need to disable timeline service which requires Jersey libraries v1, but which are not available in Spark2.0
       // See: https://www.hackingnote.com/en/spark/trouble-shooting/NoClassDefFoundError-ClientConfig/
       Seq("--conf",  "spark.hadoop.yarn.timeline-service.enabled=false") ++

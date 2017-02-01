@@ -42,6 +42,7 @@ def get_default_spark_conf():
         set("spark.rpc.numRetries", "1"). \
         set("spark.deploy.maxExecutorRetries", "1"). \
         set("spark.network.timeout", "360s"). \
+        set("spark.worker.timeout", "360"). \
         set("spark.ext.h2o.backend.cluster.mode", ExternalClusterTestHelper.cluster_mode()). \
         set("spark.ext.h2o.cloud.name", ExternalClusterTestHelper.unique_cloud_name("test")). \
         set("spark.ext.h2o.external.start.mode", os.getenv("spark.ext.h2o.external.start.mode", "manual")) .\
