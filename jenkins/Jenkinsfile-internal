@@ -37,11 +37,10 @@ properties(
 if (env.CHANGE_BRANCH != null && env.CHANGE_BRANCH != ''){
     cancelPreviousBuilds()
 }
-withCustomCommitStates(scm, 'h2o-ops-personal-auth-token', 'continuous-integration/jenkins/sw-internal') {
-    node('dX-hadoop') {
-    docker.withRegistry("https://docker.h2o.ai") {
+docker.withRegistry("https://docker.h2o.ai") {
     docker.image('sparkling-water-docker').inside("--init --dns 172.16.0.200") {
-
+        withCustomCommitStates(scm, 'h2o-ops-personal-auth-token', 'continuous-integration/jenkins/sw-internal') {
+            node('dX-hadoop') {
                 // Clean workspace
                 sh 'rm -rf *'
                 // Get Sparkling Water and save the scm environment variables
